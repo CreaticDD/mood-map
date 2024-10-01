@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { MoodMarkerComponent } from './mood-marker/mood-marker.component';
 import { Person } from '../person.model';
+import { apiKey } from './apikey';
 
 @Component({
   selector: 'app-world-map',
@@ -19,7 +20,7 @@ export class WorldMapComponent implements OnInit {
 
   ngOnInit(): void {
     this.map = new mapboxgl.Map({
-      accessToken: 'pk.eyJ1IjoiY3JlYXRpY2RkIiwiYSI6ImNtMXFobGhmNDAwODYyanM4em5yNmtnZm4ifQ.sLfd-koSyspDUuOgfPgHvA',
+      accessToken: apiKey,
       container: 'map', // The ID of the HTML element to bind the map
       style: 'mapbox://styles/mapbox/streets-v11', // Map style
       zoom: 1, // Initial zoom level
