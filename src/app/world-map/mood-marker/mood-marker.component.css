@@ -1,0 +1,55 @@
+#marker {
+    padding: .5em;
+    color: grey;
+    border: 1px solid grey;
+    border-radius: 1em;
+    background: white;
+}
+
+/* Styles for the fade-in effect */
+.fade-in {
+    opacity: 0 !important;
+    transform: scale(1.25); /* Start at 125% size */
+    transition: opacity 1s ease-in, transform 1s ease-in-out !important; /* Duration of the fade-in effect */
+}
+
+.fade-in.show {
+    opacity: 1 !important; /* Final opacity */ 
+    transform: scale(1); /* Set to 100% size */
+}
+
+img {
+    float: left;
+    height: 50px;
+    width: 50px;
+}
+
+#header {
+    display: flex;
+}
+
+#content {
+    margin-left: calc(50px + 1em);
+    font-style: italic;
+}
+
+.personal-details {
+    margin-left: 1em;
+    padding-right: 1em;
+    border-bottom: 1px solid grey;
+    align-self: flex-start;
+}
+
+.name {
+    font-size: .9em;
+}
+
+.location {
+    font-weight: bold;
+    font-size: .6em;
+    color: black;
+}
+
+:host {
+
+}

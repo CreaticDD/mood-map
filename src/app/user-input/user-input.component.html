@@ -1,0 +1,19 @@
+<p>user-input works!</p>
+<form (ngSubmit)="onSubmit()">
+    <label for="name">Name</label>
+    <input id="name" type="text" name="name" [(ngModel)]="name">
+
+    <label for="city">City</label>
+    <input id="city" type="text" name="city" [(ngModel)]="city">
+
+    <label for="country">Country</label>
+    <input id="country" type="text" name="country" [(ngModel)]="country">
+
+    <label for="mood">Mood</label>
+    <input id="mood" type="text" name="mood" [(ngModel)]="mood">
+
+
+    <p class="actions">
+        <button type="submit">Submit</button>
+    </p>
+</form>

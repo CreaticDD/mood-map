@@ -1,3 +1,5 @@
-<app-world-map />
+<app-world-map #childRef [persons]="this.persons"/>
+
+<app-user-input (newPerson)="handleNewPerson($event)"/>
 
 <router-outlet />

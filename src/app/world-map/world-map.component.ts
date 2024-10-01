@@ -1,5 +1,7 @@
-import { Component, EmbeddedViewRef, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
+import { MoodMarkerComponent } from './mood-marker/mood-marker.component';
+import { Person } from '../person.model';
 
 @Component({
   selector: 'app-world-map',
@@ -9,7 +11,11 @@ import * as mapboxgl from 'mapbox-gl';
   styleUrl: './world-map.component.css'
 })
 export class WorldMapComponent implements OnInit {
+  @Input({ required: true }) persons!: Person[]
+
   map!: mapboxgl.Map; // Declare a map variable
+
+  constructor(private viewContainer: ViewContainerRef) { }
 
   ngOnInit(): void {
     this.map = new mapboxgl.Map({
@@ -19,22 +25,41 @@ export class WorldMapComponent implements OnInit {
       zoom: 1, // Initial zoom level
     });
 
-    for (let i = 0; i < 5; i++) {
-      const markerElement = this.createCustomMarker();
-
-      new mapboxgl.Marker(markerElement)
-        .setLngLat([Math.random() * 360 - 180, Math.random() * 180 - 90])
-        .addTo(this.map);
-    }
+    this.persons.forEach(person => {
+      setTimeout(() => {
+        this.addMarker(person)
+      }, Math.random() * 60000); // Timeout to allow the initial styles to apply
+    });
 
     this.map.addControl(new mapboxgl.NavigationControl());
   }
 
-  createCustomMarker(): HTMLElement {
-    const htmlString = '<p class="marker">Hello, <strong>world!</strong></p>';
-    const template = document.createElement('template');
-    template.innerHTML = htmlString.trim(); // Trim to remove excess whitespace
-    return template.content.firstChild as HTMLElement; // Return the first child of the template
-  }
+  addMarker(person: Person) {
 
+    const component = this.viewContainer.createComponent(MoodMarkerComponent)
+
+    component.setInput("name", person.name)
+    component.setInput("location", person.city + ", " + person.country)
+    component.setInput("avatarUrl", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5q9GlWCAoQHPpOiDOECuYUeXW9MQP7Ddt-Q&s")
+    component.setInput("mood", person.mood)
+
+    const markerElement = component.location.nativeElement
+
+    const marker = new mapboxgl.Marker(markerElement)
+      .setLngLat([person.longitude, person.latitude])
+      .addTo(this.map);
+
+    setTimeout(() => {
+      markerElement.firstElementChild!.classList.add('show');
+    }, 10)
+
+    setTimeout(() => {
+      marker.getElement().firstElementChild?.classList.remove('show')
+      setTimeout(() => {
+        // marker.remove()
+      }, 1000);
+    }, 123456);
+
+
+  }
 }
