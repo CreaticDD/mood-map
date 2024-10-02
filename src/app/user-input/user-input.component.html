@@ -1,4 +1,3 @@
-<p>user-input works!</p>
 <form (ngSubmit)="onSubmit()">
     <label for="name">Name</label>
     <input id="name" type="text" name="name" [(ngModel)]="name">
@@ -10,9 +9,24 @@
     <input id="country" type="text" name="country" [(ngModel)]="country">
 
     <label for="mood">Mood</label>
-    <input id="mood" type="text" name="mood" [(ngModel)]="mood">
 
+    <div class="image-container">
 
+        <input type="radio" id="image5" name="mood" value="happy" [(ngModel)]="mood">
+        <label for="image5"> <img src="assets/images/happy.png" alt="Happy" class="image-option"> </label>
+
+        <input type="radio" id="image4" name="mood" value="hopeful" [(ngModel)]="mood">
+        <label for="image4"> <img src="assets/images/neutral.png" alt="Neutral" class="image-option"> </label>
+
+        <input type="radio" id="image3" name="mood" value="content" [(ngModel)]="mood">
+        <label for="image3"> <img src="assets/images/neutral.png" alt="Neutral" class="image-option"> </label>
+
+        <input type="radio" id="image2" name="mood" value="confused" [(ngModel)]="mood">
+        <label for="image2"> <img src="assets/images/neutral.png" alt="Neutral" class="image-option"> </label>
+
+        <input type="radio" id="image1" name="mood" value="sad" [(ngModel)]="mood">
+        <label for="image1"> <img src="assets/images/sad.png" alt="Sad" class="image-option"> </label>
+    </div>
     <p class="actions">
         <button type="submit">Submit</button>
     </p>
